@@ -1,13 +1,19 @@
 import { Request, Response } from 'express';
 import { AppDataSource } from '../database/data-source';
-import { User } from '../model/User';
+import { User } from '../models/User';
 
 const userRepository = AppDataSource.getRepository(User);
 
 export class UserController {
     // Listar todos os usuários
     async list(req: Request, res: Response) {
-        const users = await userRepository.find();
+        const users = await userRepository.find({
+            select:{
+                name:true,
+                email:true
+            }
+        });
+
         res.json(users);
         return;
     }
@@ -15,6 +21,13 @@ export class UserController {
     // Criar novo usuário
     async create(req: Request, res: Response) {
         const { name, email, password } = req.body;
+
+        const existEmail = await userRepository.findOneBy({email})
+
+        if(existEmail){
+            res.status(409).json({mensage: "Este e-mail já está wm uso!"})
+            return;
+        }
 
         const user = userRepository.create({ name, email, password });
         await userRepository.save(user);
@@ -33,8 +46,7 @@ export class UserController {
             res.status(404).json({ message: 'Usuário não encontrado' });
             return;
         }
-
-        res.json(user);
+        res.json({id: user.id,name:user.name, email:user.email});
         return;
     }
 

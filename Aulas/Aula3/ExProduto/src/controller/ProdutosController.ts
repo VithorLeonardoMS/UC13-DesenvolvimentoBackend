@@ -12,7 +12,7 @@ export const criarProduto = (req: Request, res: Response) => {
     return;
   }
 
-  const novoProduto = new Produto(id, descricao, nome, preco,quantidade);
+  const novoProduto = new Produto(id, nome, descricao, preco,quantidade);
   id += 1;
 
   produtos.push(novoProduto);

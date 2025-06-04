@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
 import { Order } from "./Order";
+import { Dish } from "./Dish";
 
 @Entity('users')
 export class User {
@@ -19,7 +20,13 @@ export class User {
     private _role: string;
 
     @Column({unique:true, length: 15, type:"varchar"})
-    private _phoneNumber
+    private _phone
+
+    @ManyToMany(() => Dish, (dish) => dish.favoritedBy)
+    @JoinTable({
+        name:"favorite_dishes"
+    })
+    favorites!: Dish[];
 
     @OneToMany(() => Order, (order) => order.user)
     orders!: Order[];
@@ -41,11 +48,11 @@ export class User {
     }
 
     /**
-     * Setter _phoneNumber
+     * Setter _phone
      * @return {string}
      */
     public get phoneNumber():string {
-		return this._phoneNumber;
+		return this._phone;
 	}
 
     /**
@@ -89,7 +96,7 @@ export class User {
 	}
 
     /**
-     * Setter _phoneNumber
+     * Setter _phone
      * @param {string} value
      */
     public set phoneNumber(value: string) {
@@ -106,12 +113,12 @@ export class User {
 
     
 
-	constructor(name:string, email:string, password:string, role:string, phoneNumber:string) {
+	constructor(name:string, email:string, password:string, role:string, phone:string) {
         this._name = name;
         this._email = email;
         this._password = password;
         this._role = role;
-        this._phoneNumber = phoneNumber
+        this._phone = phone
 	}
   
 }

@@ -107,5 +107,6 @@ export class ProductController{
     res.status(200).json({ mensagem: "Produto deletado com sucesso!" });
     return;
   };
+  
 }
 

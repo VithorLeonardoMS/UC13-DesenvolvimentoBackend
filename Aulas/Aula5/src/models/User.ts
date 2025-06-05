@@ -20,7 +20,7 @@ export class User {
     private _role: string;
 
     @Column({unique:true, length: 15, type:"varchar"})
-    private _phone
+    private _phone: string;
 
     @ManyToMany(() => Dish, (dish) => dish.favoritedBy)
     @JoinTable({
@@ -51,7 +51,7 @@ export class User {
      * Setter _phone
      * @return {string}
      */
-    public get phoneNumber():string {
+    public get phone():string {
 		return this._phone;
 	}
 
@@ -99,7 +99,7 @@ export class User {
      * Setter _phone
      * @param {string} value
      */
-    public set phoneNumber(value: string) {
+    public set phone(value: string) {
 		this._role = value;
 	}
 

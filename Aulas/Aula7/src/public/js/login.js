@@ -1,4 +1,4 @@
-const form = document.getElementById("cadastro");
+const form = document.getElementById("login");
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -7,7 +7,7 @@ form.addEventListener("submit", async (e) => {
     const password = document.getElementById("password").value;
 
     try{
-        const res = await fetch("http://localhost:3000/api/users",{
+        const res = await fetch("http://localhost:3000/api/users/login",{
             method:"POST",
             headers:{
                 "Content-Type": "application/json"
@@ -16,10 +16,10 @@ form.addEventListener("submit", async (e) => {
         });
 
         if(res.ok){
-            alert("Usuario criado com sucesso");
+            alert("Usuario logado com sucesso");
         } else{
             const data = await res.json();
-            alert(data.message || "Erro ao cadastrar usuário")
+            alert(data.message || "Erro ao realizar login!")
         }
     } catch(error) {
         alert("Erro bizonho!");

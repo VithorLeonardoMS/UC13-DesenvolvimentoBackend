@@ -17,6 +17,7 @@ form.addEventListener("submit", async (e) => {
 
         if(res.ok){
             alert("Usuario logado com sucesso");
+            window.location.href = "./pages/TelaInicial/telaInicial.html";
         } else{
             const data = await res.json();
             alert(data.message || "Erro ao realizar login!")

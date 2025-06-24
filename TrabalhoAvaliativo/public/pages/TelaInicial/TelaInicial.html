@@ -6,6 +6,7 @@
     <title>Tela inicial</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="../../css/footer.css">
+    <link rel="stylesheet" href="../../css/header.css">
 </head>
 <body>
     <header>
@@ -20,8 +21,8 @@
                 <button> Criar Produto</button>
             </nav>
 
-            <form class="barra-de-pesquisa">
-                <input type="text" placeholder="pesquisar" aria-label="Pesquisar">
+            <form class="pesquisar">
+                <input id="barra-de-pesquisa" type="text" placeholder="pesquisar" aria-label="Pesquisar">
                 <button type="submit">Buscar</button>
             </form>
 
@@ -29,6 +30,47 @@
     </header>
 
     <main>
+        <section id="section-inicial">
+        <h1>🖥️ Pichau – Montagem de Peças Personalizadas</h1>
+        <br>
+        <h3>Seja bem-vindo(a) ao sistema da Pichau, onde você pode criar, visualizar, editar e gerenciar suas próprias peças de computador de forma simples e prática.</h3>
+        <br>
+        <ul>
+            <h3>Funções:</h3>
+            <li>🔧 Cadastrar novas peças com nome, tipo, especificações e valor</li>
+            <li>📄 Visualizar a lista completa das peças já criadas</li>
+            <li>🔍 Buscar uma peça pelo seu ID ou nome</li>
+            <li>✏️ Editar as informações de qualquer peça</li>
+            <li>🗑️ Excluir peças que não são mais necessárias</p></li>
+        </ul>
+        </section>
+        <hr>
+        <section id="section-projeto">
+            <h2>Entendendo o projeto</h2>
+            <p>Este sistema foi desenvolvido como atividade avaliativa do curso Técnico em Desenvolvimento de Sistemas Senac na cadeira <b>Desenvolvimento Backend(UC13)</b>, visando demonstrar de forma prática as habilidades e conhecimentos obtidos em aula como integração ao banco de dados, e criptografia de senha com bcrypt.</p>
+            <br>
+            <h3>Metodologia</h3>
+            <p>MySQL Workbench no gerenciamento do banco de dados</p><br>
+            <h4>Neste projeto foram utilizadas as seguintes linguagens:</h4>
+            <ul>
+                <li>TypeScript</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+            </ul>
+            <br>
+            <h4>Dependências usadas:</h4>
+            <ul>
+                <li>TypeORM</li>
+                <li>Node.js</li>
+                <li>Express.js</li>
+                <li>Bcrypt.Js</li>
+                <li>reflect-metadata</li>
+                <li>MySQL2</li>
+                <li>CORS</li>
+                <li>Dotenv</li>
+            </ul>
+        </section>
 
     </main>
 
@@ -42,3 +84,9 @@
     </footer>
 </body>
 </html>
+
+
+
+
+
+

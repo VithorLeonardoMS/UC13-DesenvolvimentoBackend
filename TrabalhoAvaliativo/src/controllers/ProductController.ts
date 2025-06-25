@@ -8,14 +8,14 @@ export class ProductController{
 
   // Criar um novo produto
   public async createProduct(req: Request, res: Response){
-    const {name, description, price, user } = req.body
+    const {name, description, price, user, image } = req.body
   
-    if(!name || !price || !description || !user){
+    if(!name || !price || !description || !user || !image){
       res.status(400).json({ mensagem: "Todos os dados devem ser fornecidos - name, description, price e user"})
       return;
     }
   
-    const newProduct = new Product(name, description, price, user);
+    const newProduct = new Product(name, price, description, image, user);
   
     const product = await productRepository.create({name, price, description});
     await productRepository.save(product);
@@ -103,7 +103,7 @@ export class ProductController{
       return;
     }
 
-    await productRepository.delete(product)
+    await productRepository.delete(product.id)
     res.status(200).json({ mensagem: "Produto deletado com sucesso!" });
     return;
   };

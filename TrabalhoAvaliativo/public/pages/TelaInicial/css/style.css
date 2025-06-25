@@ -24,3 +24,7 @@ h1,h2,h3,h4,ul,p{
     padding-top: 1%;
     padding-bottom: 12vh;
 }
+
+#nav-inicio{
+    background-color: rgb(143, 0, 0);
+}

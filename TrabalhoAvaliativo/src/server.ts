@@ -5,6 +5,7 @@ import userRoutes from "./routes/UserRoutes"
 import { Request, Response } from "express";
 import { AppDataSource } from "./config/data-source";
 import { error } from "console";
+import productRoutes from "./routes/ProductRoutes"
 
 const app:Application = express();
 
@@ -27,6 +28,7 @@ app.get("/", (req:Request, res:Response) => {
 })
 
 app.use("/api", userRoutes);
+app.use("/api", productRoutes)
 
 AppDataSource.initialize()
 .then(()=>{

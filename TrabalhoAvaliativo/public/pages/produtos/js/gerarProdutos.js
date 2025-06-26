@@ -14,7 +14,14 @@ function gerarProduto(produto){//Arrumar
     const h6Usuario = document.createElement("h6");
     h6Usuario.textContent = "Por:" + (produto.user.email    );
     
+    const h6ProductId = document.createElement("h6");
+    h6ProductId.className = "productId";
+    h6ProductId.textContent = produto.id;
+
+    
+    
     topoProduto.appendChild(h6Usuario);
+    topoProduto.appendChild(h6ProductId);
     
     // Imagem do produto
     const imagemProduto = document.createElement("div");
@@ -45,6 +52,19 @@ function gerarProduto(produto){//Arrumar
     const h4Preco = document.createElement("h4");
     h4Preco.textContent = "R$" + produto.price;
     
+    // Cria a div
+    const divBotoes = document.createElement("div");
+    divBotoes.className = "botoes-produto";
+
+    // Cria o botão
+    const botaoDeletar = document.createElement("button");
+    botaoDeletar.id = "btn-delete";
+    botaoDeletar.className = "button-1";
+    botaoDeletar.textContent = "Deletar";
+
+    // Adiciona o botão dentro da div
+    divBotoes.appendChild(botaoDeletar);
+
     // Adiciona ao info-produto
     infoProduto.appendChild(h3Nome);
     infoProduto.appendChild(pModelo);
@@ -56,6 +76,7 @@ function gerarProduto(produto){//Arrumar
     container.appendChild(topoProduto);
     container.appendChild(imagemProduto);
     container.appendChild(infoProduto);
+    container.appendChild(divBotoes);
     
     section.appendChild(container);
     

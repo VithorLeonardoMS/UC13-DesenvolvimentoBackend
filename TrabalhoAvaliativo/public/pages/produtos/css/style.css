@@ -24,7 +24,7 @@ h1{
     font-family:cursive;
 }
 
-.exibindo-produtos{
+.exibicao-produtos{
     display: flex;
     justify-content: left;
     flex-direction: row;
@@ -43,7 +43,7 @@ h1{
 }
 
 .topo-produto{
-    height: 20px;
+    height: 30px;
 }
 
 .imagem-do-produto{
@@ -52,7 +52,31 @@ h1{
     background-color: azure;
 }
 
+.info-produto{
+    height: 110px;
+}
+
 .imagem-do-produto img{
     width: 220px;
     height: 220px;
+}
+
+#btn-deletar{
+
+}
+
+.button-1{
+    background-color: rgb(255, 0, 0);
+    margin: 10px 0;
+    border: 0;
+    border-radius: 2px;
+    padding: 4px;
+    font-size:medium;
+    color: white;
+    
+}
+
+.button-1:hover{
+    background-color: rgb(238, 0, 0);
+
 }

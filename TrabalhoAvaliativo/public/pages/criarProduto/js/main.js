@@ -18,14 +18,12 @@ form.addEventListener("submit", async (e) => {
     const userParams = {
         image,
         name,
-        brand: brand || null,
-        model: model || null,
+        brand,
+        model,
         price,
         description,
         userId
     }
-
-    console.error(userParams)
     
     try{
         const res = await fetch("http://localhost:3000/api/product",{

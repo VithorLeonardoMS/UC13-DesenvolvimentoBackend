@@ -13,23 +13,30 @@ export class ProductController{
     try{
       const {name, description, price, userId, image, brand, model } = req.body
   
-      const user = await userRepository.findOneBy({id:Number(userId)})                   
+      const user = await userRepository.findOneBy({id:userId})
+
     
-      if(!name || price === undefined || !description || !user || !image){
+      if(!name || price === undefined || !description || !userId || !image){
         res.status(400).json({ mensagem: "Todos os dados devem ser fornecidos - name, description, price e user"})
         return;
       }
-    
-      const newProduct = new Product(name, price, description, image, user);
-      newProduct.brand = brand;
-      newProduct.model = model;
-  
-      await productRepository.save(newProduct);
-    
-      console.log("Produto criado com sucesso!")
 
-      res.status(201).json({ mensagem: "Produto criado com sucesso!"});
-      return;
+      if(user){
+        const newProduct = new Product(name, price, description, image, user);
+        newProduct.brand = brand;
+        newProduct.model = model;
+    
+        await productRepository.save(newProduct);
+      
+        console.log("Produto criado com sucesso!")
+  
+        res.status(201).json({ mensagem: "Produto criado com sucesso!", user});
+        return;
+      } else {
+        console.error("Erro, usario não encontrado -> ProductController.createProduct. userId = " + userId)
+        return;
+      }
+      
 
     } catch(error){
       console.log("Erro em createProduct")
@@ -38,15 +45,26 @@ export class ProductController{
   
   // Listar todos os produtos
   public async listProducts(req: Request, res: Response){
-    const products = await productRepository.find()
-    res.status(200).json(products);
-    return;
+    try {
+        const products = await productRepository.find({
+            relations: ["user"]
+        });
+        res.status(200).json(products);
+    } catch (error) {
+        console.error("Erro ao listar produtos", error);
+        res.status(500).json({ mensagem: "Erro ao listar produtos" });
+    }
   };
   
   // Buscar um produto por ID
   public async findProductById(req: Request, res: Response){
     const id = Number(req.params.id);
-    const product = await productRepository.findOneBy({id:id})
+    const product = await productRepository.findOne(
+      {
+        where: {id},
+        relations: ["user"]
+      }
+      )
     if (!product) {
       res.status(404).json({ mensagem: "Produto não encontrado" });
       return;
@@ -58,7 +76,12 @@ export class ProductController{
   public async findByName(req:Request, res: Response){
     const { name } = req.params;
 
-    const product = await productRepository.findBy({name});
+    const product = await productRepository.findOne(
+      {
+        where: {name},
+        relations: ["user"]
+      }
+      )
 
     if(!product){
       res.status(404).json({mensage: "Produto não encontrado"})

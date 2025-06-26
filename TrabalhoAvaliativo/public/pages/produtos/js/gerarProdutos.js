@@ -12,7 +12,7 @@ function gerarProduto(produto){//Arrumar
     topoProduto.className = "topo-produto";
     
     const h6Usuario = document.createElement("h6");
-    h6Usuario.textContent = "Por: " + produto.user.email;
+    h6Usuario.textContent = "Por:" + (produto.user.email    );
     
     topoProduto.appendChild(h6Usuario);
     
@@ -43,7 +43,7 @@ function gerarProduto(produto){//Arrumar
     pDescricao.textContent = produto.descripton;
     
     const h4Preco = document.createElement("h4");
-    h4Preco.textContent = produto.price;
+    h4Preco.textContent = "R$" + produto.price;
     
     // Adiciona ao info-produto
     infoProduto.appendChild(h3Nome);

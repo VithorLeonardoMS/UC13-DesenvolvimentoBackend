@@ -52,3 +52,7 @@ h1{
     background-color: azure;
 }
 
+.imagem-do-produto img{
+    width: 220px;
+    height: 220px;
+}

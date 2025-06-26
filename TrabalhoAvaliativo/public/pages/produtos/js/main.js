@@ -1,4 +1,4 @@
-import { criarProdutos } from "./criarProdutos.js";
+import { gerarProdutos } from "./gerarProdutos.js";
 
 async function carregarProdutos(){
     try{
@@ -10,13 +10,11 @@ async function carregarProdutos(){
         });
     
         if(res.ok){
-            // 
             const products = await res.json();
-            criarProdutos(products);
-            //
+            gerarProdutos(products);
         } else{
             const data = await res.json();
-            alert(data.message || "Erro ao realizar login!")
+            alert(data.mensagem || "Erro ao realizar criar produto!")
         }
     } catch(error) {
         alert("Erro bizonho!");

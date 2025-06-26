@@ -1,27 +1,39 @@
 import { Request, Response } from "express";
 import { Product } from "../models/Product";
 import { AppDataSource } from "../config/data-source";
+import { User } from "../models/User";
 
 const productRepository = AppDataSource.getRepository(Product);
+const userRepository = AppDataSource.getRepository(User);
 
 export class ProductController{
 
   // Criar um novo produto
   public async createProduct(req: Request, res: Response){
-    const {name, description, price, user, image } = req.body
+    try{
+      const {name, description, price, userId, image, brand, model } = req.body
   
-    if(!name || !price || !description || !user || !image){
-      res.status(400).json({ mensagem: "Todos os dados devem ser fornecidos - name, description, price e user"})
+      const user = await userRepository.findOneBy({id:Number(userId)})                   
+    
+      if(!name || price === undefined || !description || !user || !image){
+        res.status(400).json({ mensagem: "Todos os dados devem ser fornecidos - name, description, price e user"})
+        return;
+      }
+    
+      const newProduct = new Product(name, price, description, image, user);
+      newProduct.brand = brand;
+      newProduct.model = model;
+  
+      await productRepository.save(newProduct);
+    
+      console.log("Produto criado com sucesso!")
+
+      res.status(201).json({ mensagem: "Produto criado com sucesso!"});
       return;
+
+    } catch(error){
+      console.log("Erro em createProduct")
     }
-  
-    const newProduct = new Product(name, price, description, image, user);
-  
-    const product = await productRepository.create({name, price, description});
-    await productRepository.save(product);
-  
-    res.status(201).json({ mensagem: "Produto criado com sucesso!", Product: newProduct });
-    return;
   };
   
   // Listar todos os produtos

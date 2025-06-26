@@ -1,5 +1,5 @@
 
-function criarProduto(produto){//Arrumar
+function gerarProduto(produto){//Arrumar
     // Cria os elementos
     const section = document.createElement("section");
     section.className = "exibindo-produtos";
@@ -12,7 +12,7 @@ function criarProduto(produto){//Arrumar
     topoProduto.className = "topo-produto";
     
     const h6Usuario = document.createElement("h6");
-    h6Usuario.textContent = "Por: Nome do usuário";
+    h6Usuario.textContent = "Por: " + produto.user.email;
     
     topoProduto.appendChild(h6Usuario);
     
@@ -21,7 +21,7 @@ function criarProduto(produto){//Arrumar
     imagemProduto.className = "imagem-do-produto";
     
     const img = document.createElement("img");
-    img.src = "caminho/da/imagem.jpg"; // Substitua pela imagem correta
+    img.src = produto.image;
     img.alt = "Imagem do produto";
     
     imagemProduto.appendChild(img);
@@ -31,19 +31,19 @@ function criarProduto(produto){//Arrumar
     infoProduto.className = "info-produto";
     
     const h3Nome = document.createElement("h3");
-    h3Nome.textContent = "Nome do produto";
+    h3Nome.textContent = produto.name;
     
     const pModelo = document.createElement("p");
-    pModelo.textContent = "Modelo";
+    pModelo.textContent = produto.model;
     
     const h6Marca = document.createElement("h6");
-    h6Marca.textContent = "Marca";
+    h6Marca.textContent = produto.brand;
     
     const pDescricao = document.createElement("p");
-    pDescricao.textContent = "Descrição em texto";
+    pDescricao.textContent = produto.descripton;
     
     const h4Preco = document.createElement("h4");
-    h4Preco.textContent = "Preço";
+    h4Preco.textContent = produto.price;
     
     // Adiciona ao info-produto
     infoProduto.appendChild(h3Nome);
@@ -64,9 +64,9 @@ function criarProduto(produto){//Arrumar
     destino.appendChild(section);
 }
 
-export function criarProdutos(products){
+export function gerarProdutos(products){
     products.forEach(produto => {
-          criarProduto(produto)
+          gerarProduto(produto)
         });
     
 }

@@ -1,3 +1,5 @@
+import { getUserByEmail } from "./getUserByEmail.js";
+
 const form = document.getElementById("interativo");
 
 form.addEventListener("submit", async (e) => {
@@ -16,14 +18,14 @@ form.addEventListener("submit", async (e) => {
         });
 
         if(res.ok){
-            alert("Usuario logado com sucesso");
-            window.location.href = "./pages/TelaInicial/telaInicial.html";
+            const user = await getUserByEmail(email);
+            window.location.href = `./pages/TelaInicial/telaInicial.html?id=${encodeURIComponent(user.id)}`;
         } else{
             const data = await res.json();
             alert(data.message || "Erro ao realizar login!")
         }
     } catch(error) {
-        alert("Erro bizonho!");
+        alert("Erro bizonho em login.js!");
         console.error("Erro ao criar usuário: ", error)
     }
 })
